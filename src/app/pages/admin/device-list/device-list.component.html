@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-3 col-sm-12 ml-auto ">
+    <mat-form-field class="w-100">
+      <mat-label>{{ 'Search' | translate }}</mat-label>
+      <input matInput type="text" [(ngModel)]="searchText" placeholder="{{ 'Enter Words for Search' | translate }}"
+        name="SearchText">
+      <a type="button" matSuffix [attr.aria-label]="'Search'">
+        <mat-icon>search</mat-icon>
+      </a>
+    </mat-form-field>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'Id' | translate }}</th>
+          <th>{{ 'Device Name' | translate }}</th>
+          <th>{{ 'Device Status' | translate }}</th>
+          <th>{{ 'Device Date Time' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let device of devices | filter:searchText | paginate: paginationConfig">
+          <td> {{ device.Id }} </td>
+          <td> {{ device.DeviceName }}</td>
+          <mat-slide-toggle [checked]="device.DeviceStatus ? true : false" (change)="toggle(device.DeviceSecret)">
+          </mat-slide-toggle>
+          <td> {{ device.CreatedAt | translate }}</td>
+          <td class="list-button text-right">
+            <a mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon class="list-menu">more_vert</mat-icon>
+            </a>
+            <mat-menu #menu="matMenu">
+              <a mat-menu-item [routerLink]="['/device/edit/',device.Id]">
+                <mat-icon>edit</mat-icon>
+                <span>{{ 'Edit' | translate }}</span>
+              </a>
+              <a mat-menu-item (click)="userDelete(user.Id)">
+                <mat-icon>delete</mat-icon>
+                <span>{{ 'Delete' | translate }}</span>
+              </a>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-pagination [config]="paginationConfig"></app-pagination>

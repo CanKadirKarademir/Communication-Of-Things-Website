@@ -1,0 +1,25 @@
+<form #deviceForm='ngForm' (ngSubmit)="onSave(deviceForm)">
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-outline card-info">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 form-group">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>{{ 'Device Name' | translate }}</mat-label>
+                <input matInput type="text" placeholder="{{ 'Enter Device Name' | translate }}"
+                  pattern="^[A-Za-zÇçÖöŞşÜüĞğİı ]+$" name="DeviceName" #DeviceName="ngModel" maxlength="20"
+                  [(ngModel)]="_model.DeviceName" required>
+                <mat-error *ngIf="DeviceName.invalid&&DeviceName.touched">
+                  {{ 'Device Name field must be filled' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-info w-100">{{'Save'| translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  example:
+    container_name: communication-of-things-admin
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "4203:4203"
+    environment:
+      PORT: 4203
