@@ -51,7 +51,7 @@ export class AdminSidebarItemService {
           link: '/device/add',
         },
       ],
-      authorize: [Roles.Root, Roles.Administrator],
+      authorize: [Roles.Root, Roles.Administrator, Roles.User],
     },
   ];
 
